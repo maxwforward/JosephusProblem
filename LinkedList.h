@@ -171,27 +171,27 @@ class linkedList
 	{
 		// Create a new node with data and add it after the current pointer
 		node<dataType>* newNode = new node<dataType>(data); // newNode is a pointer to a node object
-		newNode->setNext(current->getNext()); // Set the new node's next pointer to the current node's next pointer
-		current->setNext(newNode); // Set the current node's next pointer to the new node
+		newNode->setNext(current->getNext()); // Set newNode's next pointer to the current node's next pointer
+		current->setNext(newNode); // Set the current node's next pointer to newNode
 		size++; // Increment the size when we add a node
 	}
 
 	// Method that deletes a node at the current pointer and returns it's contents
 	dataType RemoveCurrent()
 	{
-		// If current pointer is equal to the head pointer
+		// If the current pointer is equal to the head...
 		if (current == head)
 		{
 			return RemoveFromFront(); // Remove from front and return it's contents
 		}
 
-		// If current pointer is equal to the tail pointer
+		// If the current pointer is equal to the tail...
 		if (current == tail)
 		{
 			return RemoveFromEnd(); // Remove from end and return it's contents
 		}
 
-		// Declare and use a node pointer to save the pointer to the node that's being removed (current)
+		// Declare a node pointer to store the pointer to the node that's being removed (current)
 		node<dataType>* removeNode = current;
 
 		// Move the current pointer to the node before it
