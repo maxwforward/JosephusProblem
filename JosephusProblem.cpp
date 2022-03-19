@@ -1,18 +1,14 @@
-//#################################################################################################################################################
+//####################################################################################################################################
 //	Josephus Problem
 //	Max Forward
-//#################################################################################################################################################
+//####################################################################################################################################
 
 // Include header file
 #include"LinkedList.h"
 
-
-/**************************************************************************************************************************************************
-  Josephus Problem
-**************************************************************************************************************************************************/
-
+//====================================================================================================================================
 // Main Method
-//=================================================================================================================================================
+//====================================================================================================================================
 int main()
 {
 	// Create a linked list to use for the Josephus Problem
@@ -28,20 +24,20 @@ int main()
 
 	// Get user Input
 	cout << "Enter the number of people in the circle, between zero and one hundred: ";
-	cin >> P; // store user input in P
+	cin >> P; // Store user input in P
 	while (P < 0 || P > 100) // Check for invalid input
 	{
-		// prompt user to enter a different value
+		// Prompt user to enter a different value
 		cout << "Please enter a a valid number: ";
-		cin >> P; // store user input in P
+		cin >> P; // Store user input in P
 	}
 	cout << "Every Nth person around the circle will be killed, choose a number for N betwen one and twenty: ";
-	cin >> N; // store user input in N
+	cin >> N; // Store user input in N
 	while (N < 1 || N > 20) // Check for invalid input
 	{
-		// prompt user to enter a different value
+		// Prompt user to enter a different value
 		cout << "Please enter a a valid number: ";
-		cin >> N; // store user input in N
+		cin >> N; // Store user input in N
 	}
 
 	// Build Linked List
@@ -52,15 +48,15 @@ int main()
 	}
 
 	// Eliminate People from the circle to leave one remaining
-	while ((circle->Length()) != 1) // While the length of the circle doe not equal 1 person
+	while ((circle->Length()) != 1) // While there is still more than one person remaining in the circle...
 	{
 		// Move the current pointer over every N amount of spots
 		for (int i = 0; i < N; i++)
 		{
-			circle->NextNode(); // Move current pointer to next node
+			circle->NextNode(); // Move the current pointer to next node
 		}
 
-		// Remove the element at current
+		// Remove element at the current pointer
 		circle->RemoveCurrent();
 	}
 

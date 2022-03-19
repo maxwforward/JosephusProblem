@@ -1,7 +1,7 @@
-//#################################################################################################################################################
-//	Linked List Header File
+//####################################################################################################################################
+//	Linked List Header File (Template)
 //	Max Forward
-//#################################################################################################################################################
+//####################################################################################################################################
 
 // Library Imports
 #include <iostream>
@@ -12,59 +12,56 @@ using namespace std;
 // Header guide
 #pragma once // only include this file once
 
-
-/**************************************************************************************************************************************************
-	Templated Linked List
-**************************************************************************************************************************************************/
-
+//====================================================================================================================================
 // Node Class
-//=================================================================================================================================================
+//====================================================================================================================================
 template <class dataType> // alows class to store members of any type
 class node
 {
 	// Private members of node class
 	private:
-		dataType element; // declare variable that can be any data type to use for element at a node in the linked list
-		node<dataType>* next; // declare a variable to use as a pointer to point to the next node in a linked list
+		dataType element; // Declare a variable that can be any data type to use for the element at a node in the linked list
+		node<dataType>* next; // Declare a variable to use as a pointer to point to the next node in a linked list
 
 	// Public members of node class
 	public:
 		node(dataType data) // Constructor for node
 		{
-			element = data; // set element of node equal to data in the parameter
-			next = NULL; // set pointer to next node equal to NULL
+			element = data; // Set element at node equal to the data in the parameter
+			next = NULL; // Set pointer to next node equal to NULL
 		}
 
 	// Setter for pointer to next node
 	void setNext(node<dataType>* nextNode)
 	{
-		next = nextNode; // sets value of next equal to the value in the parameter
+		next = nextNode; // Sets value of next equal to the value in the parameter
 	}
 
 	// Getter for pointer to next node
 	node<dataType>* getNext()
 	{
-		return next; // return pointer to the next node
+		return next; // Return pointer to the next node
 	}
 
-	// Getter for element of node
+	// Getter for element at node
 	dataType getElement()
 	{
-		return element; // return the element
+		return element; // Return the element
 	}
 };
 
+//====================================================================================================================================
 // Linked List Class
-//=================================================================================================================================================
+//====================================================================================================================================
 template <class dataType> // alows class to store members of any type
 class linkedList
 {
 	// Private members of linkedList
 	private:
-		node<dataType>* head; // declare a variable to use as a pointer to point to the head (first node) of the linked list
-		node<dataType>* current; // declare a variable to use as a pointer to point to the current node of a linked list
-		node<dataType>* tail; // declare a variable to use as a pointer to point to the tail (last node) of the linked list
-		int size; // declare a variable to use for the size of the list
+		node<dataType>* head; // Declare a variable to use as a pointer to the head (first node) of the linked list
+		node<dataType>* current; // Declare a variable to use as a pointer to the current node of the linked list
+		node<dataType>* tail; // Declare a variable to use as a pointer to the tail (last node) of the linked list
+		int size; // Declare a variable to use for the size of the list
 
 	// Public members of linkedList
 	public:
@@ -80,22 +77,22 @@ class linkedList
 	// Method that creates a node containing data and adds it to the front of the list
 	void AddToFront(dataType data)
 	{
-		// If there are no nodes (linked list is empty)
-		if (head == NULL) // If the pointer to head has no value
+		// If there are no nodes (linked list is empty)...
+		if (head == NULL) // If the pointer to head has no value...
 		{
 			// Create a new node with data and add it to the front
-			node<dataType>* newNode = new node<dataType>(data); // newNode is a pointer that points to a node object
-			head = newNode; // set the head equal to the new node added to the front
-			tail = newNode; // set the tail equal to the new node added to the front because it is the only node in the list and therefore is also the tail
+			node<dataType>* newNode = new node<dataType>(data); // newNode is a pointer to a node object
+			head = newNode; // Set the head equal to the new node added to the front
+			tail = newNode; // Set the tail equal to the new node added to the front because it is the only node in the list
 			size++; // Increment the size when we add a node
 		}
-		// If there already is a head in the liked list
+		// If there is already a head in the liked list...
 		else
 		{
 			// Create a new node with data and add it to the front
-			node<dataType>* newNode = new node<dataType>(data); // newNode is a pointer that points to a node object
-			newNode->setNext(head); // set newNode's pointer to the next node equal to the current head in order to insert it before the head
-			head = newNode; // set the head equal to the new node added to the front
+			node<dataType>* newNode = new node<dataType>(data); // newNode is a pointer to a node object
+			newNode->setNext(head); // Set newNode's pointer to the next node equal to the current head to insert it before the head
+			head = newNode; // Set the head equal to the new node added to the front
 			size++; // Increment the size when we add a node
 		}
 	}
@@ -103,52 +100,52 @@ class linkedList
 	// Method that creates a node containing data and adds it to the end of the list
 	void AddToEnd(dataType data)
 	{
-		// If there are no nodes (linked list is empty)
-		if (tail == NULL) // If the pointer to tail has no value
+		// If there are no nodes (linked list is empty)...
+		if (tail == NULL) // If the pointer to tail has no value...
 		{
 			// Create a new node with data and add it to the end
-			node<dataType>* newNode = new node<dataType>(data); // newNode is a pointer that points to a node object
-			tail = newNode; // set the tail equal to the new node added to the end
-			head = newNode; // set the head equal to the new node added to the end because it is the only node in the list and therefore is also the head
+			node<dataType>* newNode = new node<dataType>(data); // newNode is a pointer to a node object
+			tail = newNode; // Set the tail equal to the new node added to the end
+			head = newNode; // Set the head equal to the new node added to the end because it is the only node in the list
 			size++; // Increment the size when we add a node
 		}
-		// If there already is a tail in the liked list
+		// If there is already a tail in the liked list...
 		else
 		{
 			// Create a new node with data and add it to the end
-			node<dataType>* newNode = new node<dataType>(data); // newNode is a pointer that points to a node object
-			tail->setNext(newNode); // set the current tail node's pointer to the next node equal to the new node in order to insert it after the tail
+			node<dataType>* newNode = new node<dataType>(data); // newNode is a pointer to a node object
+			tail->setNext(newNode); // Set the current tail's pointer to the next node equal to newNode to insert it at the end
 			tail = newNode; // set the tail equal to the new node added to the end
 			size++; // Increment the size when we add a node
 		}
 	}
 
-	// Method that creates a node containing data and adds it to the list at index, return boolean for success or failure
+	// Method that creates a node containing data and adds it to the list at a specific index, returns boolean for success or failure
 	bool AddAtIndex(dataType data, int index)
 	{
-		// If index is invalid (index can't be negative or bigger than the size)
-		if (index < 0 || (index + 1) > size) // Index is zero based so add 1 to see if its greater than the size
+		// If index is invalid (index can't be negative or bigger than the size)...
+		if (index < 0 || (index + 1) > size) // index is zero based so add 1 to see if it is greater than the size
 		{
-			return false; // return false for failure
+			return false; // Return false for failure
 		}
-		// If index is valid
+		// If index is valid...
 		else
 		{
-			// If index is equal to zero
+			// If index is equal to zero...
 			if (index == 0)
 			{
 				AddToFront(data); // Add node with data to front
 			}
-			// If index is not equal to zero
+			// If index is not equal to zero...
 			else
 			{
 				// Move the current pointer to the node before where we want to add a node
 				for (int i = 0; i < index; i++)
 				{
-					NextNode(); // move to next node
+					NextNode(); // Move pointer to next node
 				}
 
-				// Inset a node after the current pointer
+				// Insert a node after the current pointer
 				InsertAfterCurrent(data);
 			}
 		}
@@ -157,15 +154,15 @@ class linkedList
 	// Method that moves the current pointer to the next node, wraps to front if it navigates past the end
 	void NextNode()
 	{
-		// If current pointer is equal to NULL or tail, make it at the front on the list
+		// If current pointer is equal to NULL or tail, move it to the front of the list
 		if (current == NULL || current == tail)
 		{
-			current = head; // Set current equal to the head
+			current = head; // Set current pointer equal to the head
 		}
-		// If current pointer is at any other node
+		// If current pointer is at any other node...
 		else
 		{
-			current = current->getNext(); // Sets current pointer to the next node
+			current = current->getNext(); // Set current pointer to the next node
 		}
 	}
 
@@ -173,9 +170,9 @@ class linkedList
 	void InsertAfterCurrent(dataType data)
 	{
 		// Create a new node with data and add it after the current pointer
-		node<dataType>* newNode = new node<dataType>(data); // newNode is a pointer that points to a node object
-		newNode->setNext(current->getNext()); // set the new node's next pointer to the current node's next pointer
-		current->setNext(newNode); // set the current node's next pointer to the new node
+		node<dataType>* newNode = new node<dataType>(data); // newNode is a pointer to a node object
+		newNode->setNext(current->getNext()); // Set the new node's next pointer to the current node's next pointer
+		current->setNext(newNode); // Set the current node's next pointer to the new node
 		size++; // Increment the size when we add a node
 	}
 
