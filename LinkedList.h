@@ -74,7 +74,9 @@ class linkedList
 			size = 0; // Haven't added a node yet so the size is 0
 		}
 
+	//--------------------------------------------------------------------------------------------------------------------------------
 	// Method that creates a node containing data and adds it to the front of the list
+	//--------------------------------------------------------------------------------------------------------------------------------
 	void AddToFront(dataType data)
 	{
 		// If there are no nodes (linked list is empty)...
@@ -97,7 +99,9 @@ class linkedList
 		}
 	}
 
+	//--------------------------------------------------------------------------------------------------------------------------------
 	// Method that creates a node containing data and adds it to the end of the list
+	//--------------------------------------------------------------------------------------------------------------------------------
 	void AddToEnd(dataType data)
 	{
 		// If there are no nodes (linked list is empty)...
@@ -120,7 +124,9 @@ class linkedList
 		}
 	}
 
+	//--------------------------------------------------------------------------------------------------------------------------------
 	// Method that creates a node containing data and adds it to the list at a specific index, returns boolean for success or failure
+	//--------------------------------------------------------------------------------------------------------------------------------
 	bool AddAtIndex(dataType data, int index)
 	{
 		// If index is invalid (index can't be negative or bigger than the size)...
@@ -151,7 +157,9 @@ class linkedList
 		}
 	}
 
+	//--------------------------------------------------------------------------------------------------------------------------------
 	// Method that moves the current pointer to the next node, wraps to front if it navigates past the end
+	//--------------------------------------------------------------------------------------------------------------------------------
 	void NextNode()
 	{
 		// If current pointer is equal to NULL or tail, move it to the front of the list
@@ -166,7 +174,9 @@ class linkedList
 		}
 	}
 
+	//--------------------------------------------------------------------------------------------------------------------------------
 	// Method that creates a node containing data and inserts it after wherever the current pointer is pointing 
+	//--------------------------------------------------------------------------------------------------------------------------------
 	void InsertAfterCurrent(dataType data)
 	{
 		// Create a new node with data and add it after the current pointer
@@ -383,7 +393,9 @@ class linkedList
 		}
 	}
 
-	// Function that returns an index of the item in the list
+	//--------------------------------------------------------------------------------------------------------------------------------
+	// Function that returns the index of an item in the linked list
+	//--------------------------------------------------------------------------------------------------------------------------------
 	int IndexOf(dataType data)
 	{
 		// Create a variable to store index
@@ -398,7 +410,7 @@ class linkedList
 		// Keep looping until we get to the item we found
 		while (true)
 		{
-			// If current node contains item
+			// If current node contains item...
 			if (current == foundItem)
 			{
 				return index; // return index
@@ -412,10 +424,12 @@ class linkedList
 		}
 	}
 
+	//--------------------------------------------------------------------------------------------------------------------------------
 	// Function that returns the data contained in the first node, does not delete it
+	//--------------------------------------------------------------------------------------------------------------------------------
 	dataType RetrieveFront()
 	{
-		// Delcare a pointer to point to the node we are retrieving
+		// Delcare a pointer to the node we are retrieving
 		node<dataType>* retrieveNode;
 
 		// Set node we are retrieving to the head and return it
@@ -423,7 +437,9 @@ class linkedList
 		return retrieveNode->getElement();
 	}
 
+	//--------------------------------------------------------------------------------------------------------------------------------
 	// Function that returns the data contained in the last node, does not delete it
+	//--------------------------------------------------------------------------------------------------------------------------------
 	dataType RetrieveEnd()
 	{
 		// Delcare a pointer to point to the node we are retrieving
@@ -434,23 +450,26 @@ class linkedList
 		return retrieveNode->getElement();
 	}
 
-	// Function that returns a pointer to a node # index, does not delete it, returns null if index is out of bounds or data does not exist
+	//--------------------------------------------------------------------------------------------------------------------------------
+	// Function that returns a pointer to a node at an index specified by input, does not delete it.
+	// Returns null if index is out of bounds or data does not exist
+	//--------------------------------------------------------------------------------------------------------------------------------
 	node<dataType>* Retrieve(int index)
 	{
-		// Delcare a pointer to point to the node we are retrieving
+		// Delcare a pointer to the node we are retrieving
 		node<dataType>* retrieveNode;
 
-		// If index is out of bounds
+		// If index is out of bounds...
 		if (index < 0 || index >(size - 1))
 		{
 			// Return NULL
 			retrieveNode = NULL; // set pointer to node we are retrieving equal to NULL
 			return retrieveNode;
 		}
-		// Index is not out of bounds
+		// Index is not out of bounds...
 		else
 		{
-			// Set current pointer to head to start at the head
+			// Set current pointer to head to start at the front
 			current = head;
 
 			// Move the node to the index
@@ -459,27 +478,29 @@ class linkedList
 				NextNode(); // Moves current pointer to next node
 			}
 
-			// Returns the contents of the current pointer
+			// Return the contents of the current pointer
 			return current->getElement();
 		}
 	}
 
-	// Function that creates an array from the contents of the list and returns it
+	//--------------------------------------------------------------------------------------------------------------------------------
+	// Function that creates an array from the contents of the linked list and returns it
+	//--------------------------------------------------------------------------------------------------------------------------------
 	dataType* ToArray()
 	{
-		// Declare a pointer to point to the array
+		// Declare a pointer to the array
 		dataType* listArray;
 
-		// Dynamicaly alocate an array based on size
+		// Dynamicaly alocate the array based on size
 		listArray = new dataType[size];
 
 		// Set current pointer to the head
 		current = head;
 
-		// Place each element in the list inside the array
+		// Place each element of the list inside the array
 		for (int i = 0; i < size; i++)
 		{
-			// sets member od array to element of the node current is pointing to
+			// Set member of the array to the element of the node that current is pointing to
 			listArray[i] = current->getElement();
 
 			// Move current pointer to the next node
@@ -490,28 +511,34 @@ class linkedList
 		return listArray;
 	}
 
+	//--------------------------------------------------------------------------------------------------------------------------------
 	// Function that empties out the linked list, deleting everything
+	//--------------------------------------------------------------------------------------------------------------------------------
 	void Empty()
 	{
-		// While there is more than one node remaining...
-		while (size != 1)
+		// While there is at least one node remaining...
+		while (size != 0)
 		{
 			RemoveFromEnd(); // Remove the last node
 		}
 
-		// Set pointers to NULL because there are no more elements in the list
+		// Set all node pointers to NULL because there are no more elements in the list
 		current = NULL;
 		head = NULL;
 		tail = NULL;
 	}
 
+	//--------------------------------------------------------------------------------------------------------------------------------
 	// Function that returns how many elements are in the linked list
+	//--------------------------------------------------------------------------------------------------------------------------------
 	int Length()
 	{
 		return size;
 	}
 
+	//--------------------------------------------------------------------------------------------------------------------------------
 	// Function for printing contents of the linked list
+	//--------------------------------------------------------------------------------------------------------------------------------
 	void printList()
 	{
 		// Save position of the current pointer so we don't lose it

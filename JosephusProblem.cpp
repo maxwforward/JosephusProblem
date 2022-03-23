@@ -15,7 +15,7 @@ int main()
 	linkedList<int>* circle = new linkedList<int>; // circle is a pointer that points to a linked list object
 
 	// Print Main Menu
-	cout << "Welcome!" << endl;
+	cout << endl << "Welcome!" << endl;
 	cout << "Let's solve the Josephus Problem!" << endl << endl;
 
 	// Declare Variables to store user input
