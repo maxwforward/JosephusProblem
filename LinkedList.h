@@ -490,10 +490,10 @@ class linkedList
 		return listArray;
 	}
 
-	// Function that empties out the list, deletes everything
+	// Function that empties out the linked list, deleting everything
 	void Empty()
 	{
-		// While size of the linked list is not zero
+		// While there is more than one node remaining...
 		while (size != 1)
 		{
 			RemoveFromEnd(); // Remove the last node
@@ -505,33 +505,33 @@ class linkedList
 		tail = NULL;
 	}
 
-	// Function that returns how many elements are in the list
+	// Function that returns how many elements are in the linked list
 	int Length()
 	{
-		return size; // return size
+		return size;
 	}
 
-	// Function for printing contents pf the list
+	// Function for printing contents of the linked list
 	void printList()
 	{
-		// Save position of current pointer so we don't lose it
+		// Save position of the current pointer so we don't lose it
 		node<dataType>* savedPosition;
 		savedPosition = current;
 
-		// Set current to head to start at the beginning of the list
+		// Set current pointer to head in order to start at the beginning of the list
 		current = head;
 
-		// Print members each on newline while current is not NULL
+		// While current pointer is not NULL...
 		while (current != NULL)
 		{
-			// Print element
+			// Print elemend at node
 			cout << current->getElement() << endl;
 
-			// Set current to whatever the next pointetr is pointing to
+			// Set current pointer to next node
 			current = current->getNext();
 		}
 
-		// Restore current pointer
+		// Restore the current pointer
 		current = savedPosition;
 	}
 };
