@@ -75,7 +75,7 @@ class linkedList
 		}
 
 	//--------------------------------------------------------------------------------------------------------------------------------
-	// Method that creates a node containing data and adds it to the front of the list
+	// Function that creates a node containing data and adds it to the front of the list
 	//--------------------------------------------------------------------------------------------------------------------------------
 	void AddToFront(dataType data)
 	{
@@ -100,7 +100,7 @@ class linkedList
 	}
 
 	//--------------------------------------------------------------------------------------------------------------------------------
-	// Method that creates a node containing data and adds it to the end of the list
+	// Function that creates a node containing data and adds it to the end of the list
 	//--------------------------------------------------------------------------------------------------------------------------------
 	void AddToEnd(dataType data)
 	{
@@ -125,7 +125,7 @@ class linkedList
 	}
 
 	//--------------------------------------------------------------------------------------------------------------------------------
-	// Method that creates a node containing data and adds it to the list at a specific index, returns boolean for success or failure
+	// Function that creates a node containing data and adds it to the list at a specific index, returns boolean for success or failure
 	//--------------------------------------------------------------------------------------------------------------------------------
 	bool AddAtIndex(dataType data, int index)
 	{
@@ -158,7 +158,7 @@ class linkedList
 	}
 
 	//--------------------------------------------------------------------------------------------------------------------------------
-	// Method that moves the current pointer to the next node, wraps to front if it navigates past the end
+	// Function that moves the current pointer to the next node, wraps to front if it navigates past the end
 	//--------------------------------------------------------------------------------------------------------------------------------
 	void NextNode()
 	{
@@ -175,7 +175,7 @@ class linkedList
 	}
 
 	//--------------------------------------------------------------------------------------------------------------------------------
-	// Method that creates a node containing data and inserts it after wherever the current pointer is pointing 
+	// Function that creates a node containing data and inserts it after wherever the current pointer is pointing 
 	//--------------------------------------------------------------------------------------------------------------------------------
 	void InsertAfterCurrent(dataType data)
 	{
@@ -186,22 +186,24 @@ class linkedList
 		size++; // Increment the size when we add a node
 	}
 
-	// Method that deletes a node at the current pointer and returns it's contents
+	//--------------------------------------------------------------------------------------------------------------------------------
+	// Function that deletes the node at the current pointer and returns it's contents
+	//--------------------------------------------------------------------------------------------------------------------------------
 	dataType RemoveCurrent()
 	{
 		// If the current pointer is equal to the head...
 		if (current == head)
 		{
-			return RemoveFromFront(); // Remove from front and return it's contents
+			return RemoveFromFront(); // Remove node from front and return it's contents
 		}
 
 		// If the current pointer is equal to the tail...
 		if (current == tail)
 		{
-			return RemoveFromEnd(); // Remove from end and return it's contents
+			return RemoveFromEnd(); // Remove node from end and return it's contents
 		}
 
-		// Declare a node pointer to store the pointer to the node that's being removed (current)
+		// Declare a node pointer to store a pointer to the node that's being removed (current)
 		node<dataType>* removeNode = current;
 
 		// Move the current pointer to the node before it
@@ -210,8 +212,8 @@ class linkedList
 			NextNode(); // Move current pointer to the next node
 		}
 
-		// Current is now at the node before the one we are removing
-		current->setNext(removeNode->getNext()); // Set the next node after current to be the node after the one that is being removed
+		// Current pointer is now at the node before the one we are removing
+		current->setNext(removeNode->getNext()); // Set the next node after current to be the next node after the removed node
 
 		// Save the contents of the node we are going to remove
 		dataType contentsOfRemovedNode = removeNode->getElement();
@@ -224,36 +226,40 @@ class linkedList
 		return contentsOfRemovedNode;
 	}
 
-	// Method that deletes the first item and returns its contents
+	//--------------------------------------------------------------------------------------------------------------------------------
+	// Function that deletes the first node in the linked list and returns it's contents
+	//--------------------------------------------------------------------------------------------------------------------------------
 	dataType RemoveFromFront()
 	{
-		// Declare and use a node pointer to save the pointer to the node that's being removed (head)
+		// Declare a node pointer to store a pointer to the node that's being removed (head)
 		node<dataType>* removeNode = head;
 
-		// Have head pointer point to the node after the head which we are removing
+		// Set head pointer to the node after the head (because we are removing the head)
 		head = removeNode->getNext();
 
-		// Save the contents of the node we are going to remove
+		// Save the contents of the node we are going to remove (head)
 		dataType contentsOfRemovedNode = removeNode->getElement();
 
 		// Remove the node
 		delete removeNode;
 		size--; // Decrement size of the linked list because we have removed a node
 
-		// Set current equal to tail because it is the node before the one that is removed
+		// Set current pointer equal to the tail because it's the node before the one we removed
 		current = tail;
 
 		// Return the contents of the removed node
 		return contentsOfRemovedNode;
 	}
 
-	// Method that deletes last item and returns its contents
+	//--------------------------------------------------------------------------------------------------------------------------------
+	// Function that deletes last node in the linked list and returns it's contents
+	//--------------------------------------------------------------------------------------------------------------------------------
 	dataType RemoveFromEnd()
 	{
-		// Declare and use a node pointer to save the pointer to the node that's being removed (tail)
+		// Declare a node pointer to store a pointer to the node that's being removed (tail)
 		node<dataType>* removeNode = tail;
 
-		// Set the current pointer to tail
+		// Set the current pointer to the tail
 		current = tail;
 
 		// Move the current pointer to the node before the tail
@@ -262,13 +268,13 @@ class linkedList
 			NextNode(); // Move current pointer to the next node
 		}
 
-		// Set the node before the tail to point to what the tail points to (NULL)
+		// Set next node of the node before the tail to next node of the tail (NULL)
 		current->setNext(tail->getNext());
 
-		// Set tail to node before the end because we are removing the end
+		// Set tail to node before the end (because we are removing the tail)
 		tail = current;
 
-		// Save the contents of the node we are going to remove
+		// Save the contents of the node we are going to remove (tail)
 		dataType contentsOfRemovedNode = removeNode->getElement();
 
 		// Remove the node
@@ -279,108 +285,116 @@ class linkedList
 		return contentsOfRemovedNode;
 	}
 
-	// find first instance of data and remove it
+	//--------------------------------------------------------------------------------------------------------------------------------
+	// Function that finds the first instance of some data, specified by input, and removes it
+	//--------------------------------------------------------------------------------------------------------------------------------
 	void RemoveFirst(dataType data)
 	{
-		// Set current pointer equal to head to start at the front
+		// Set current pointer to head so we can start at the front
 		current = head;
 
-		// Check if the first item in the list is the data
+		// If first instance of the data is at the front...
 		if (current->getElement() == data)
 		{
-			RemoveFromFront(); // Removes the first node
-			return; // return from the function
+			RemoveFromFront(); // Remove the first node
+			return; // Return from the function
 		}
-		// If first instance of data is not at the front
+		// If first instance of the data is not at the front...
 		else
 		{
-			// Check each node to see if it contains data
-			while (current->getElement() != data) // while the node current pointer points to does not contain the data in parameter
+			// Check each node to see if it contains the data
+			while (current->getElement() != data) // While the current pointer does not contain the data...
 			{
-				// Move the current pointer to next node
+				// Move current pointer to the next node
 				NextNode();
 
-				// If the current pointer is at the tail
-				if (current->getNext() == NULL) // If the next node after the current pointer is NULL
+				// If the current pointer is at the tail...
+				if (current->getNext() == NULL) // If the next node after the current pointer is NULL...
 				{
-					// If the tail contains the data we are looking for
+					// If tail contains the data we are looking for...
 					if (current->getElement() == data)
 					{
 						// Remove it
-						RemoveFromEnd(); // Removes it from end
-						return; // return from function
+						RemoveFromEnd(); // Remove the last node
+						return; // Return from function
 					}
-					// Else return from the function because we already searched the whole list for data
+					// Else, return from the function because we already searched the whole list for the data
 					else
 					{
-						return; // return from function
+						return; // Return from function
 					}
 				}
 
-				// If data at current node is equal to data in the parameter
+				// If first instance of the data is at the current pointer...
 				if (current->getElement() == data)
 				{
 					RemoveCurrent(); // Remove current node
-					return; // return from function
+					return; // Return from function
 				}
 			}
 		}
 	}
 
-	// Function that finds each instance of data and remove it
+	//--------------------------------------------------------------------------------------------------------------------------------
+	// Function that finds each instance of some data, specified by input, and removes it
+	//--------------------------------------------------------------------------------------------------------------------------------
 	void RemoveAll(dataType data)
 	{
-		// While the element exists in the list
+		// While the data exists in the list...
 		while (ElementExists(data) == true)
 		{
-			RemoveFirst(data); // Remove the first instance of it
+			RemoveFirst(data); // Remove first instance of the data
 		}
 
 		return; // Return if we don't find the data
 	}
 
-	// Function that returns true or false if element exists in list
+	//--------------------------------------------------------------------------------------------------------------------------------
+	// Function that returns true or false if some data, specified by input, exists in the linked list
+	//--------------------------------------------------------------------------------------------------------------------------------
 	bool ElementExists(dataType data)
 	{
-		// Set current to NULL to start at the beginning
+		// Set current pointer to head so we can start at the front
 		current = head;
 
-		// Check each node to see if it contains data
-		while (current->getNext() != NULL) // while next node is not NULL
+		// Check each node to see if it contains the data
+		while (current->getNext() != NULL) // While next node is not NULL...
 		{
-			// If current node contains element
+			// If current node contains the data...
 			if (current->getElement() == data)
 			{
-				return true; // return true
+				return true;
 			}
 
-			// Move the current pointer to next node
+			// Move current pointer to the next node
 			NextNode();
 		}
 
-		// If last node contains element
+		// If last node contains the data...
 		if (current->getElement() == data)
 		{
-			return true; // return true
+			return true;
 		}
 
-		// After we have searched the whole list
-		return false; // return false
+		// After we have searched the entire list, return false
+		return false;
 	}
 
-	// Function that looks for data in the list, if found return a pointer to its node
+	//--------------------------------------------------------------------------------------------------------------------------------
+	// Function that looks for some data, specified by input, and if found returns a pointer to the node
+	//--------------------------------------------------------------------------------------------------------------------------------
 	node<dataType>* Find(dataType data)
 	{
 		// Declare a pointer to point to the found node
 		node<dataType>* foundNode;
 
-		// Set current pointer to the head to start from the front
+		// Set current pointer to head so we can start at the front
 		current = head;
 
-		// Keep looping until we find the element
+		// Keep looping until we find the data
 		while (true)
 		{
-			// If current node contains element
+			// If current node contains the data
 			if (current->getElement() == data)
 			{
 				// Return pointer to the node
@@ -388,7 +402,7 @@ class linkedList
 				return foundNode;
 			}
 
-			// Move the current pointer to next node
+			// Move current pointer to the next node
 			NextNode();
 		}
 	}
@@ -416,7 +430,7 @@ class linkedList
 				return index; // return index
 			}
 
-			// Move the current pointer to next node
+			// Move current pointer to the next node
 			NextNode();
 
 			// Increment the index when we move to the next node
